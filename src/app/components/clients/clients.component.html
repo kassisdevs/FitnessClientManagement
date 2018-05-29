@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-md-6">
+    <h4> <i class="fa fa-users"></i> Clients</h4>
+  </div>
+  <div class="col-md-6">
+    <h4 class="text-right"> <i class="fa fa-money"></i> <span class="badge badge-danger">{{totalBalance | currency:'USD':true}}</span> </h4>
+  </div>
+</div>
+<table *ngIf="clients?.length > 0; else noclients" class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Membership</th>
+      <th>State</th>
+      <th>Balance</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let client of clients">
+      <th scope="row">***{{client.$key.slice(16)}}</th>
+      <td>{{client.firstName}} {{client.lastName}}</td>
+      <td>{{client.email}}</td>
+      <td>***{{client.phone.slice(8)}}</td>
+      <td><span class="badge" 
+        [class.badge-success]="client.membership == 'VIP'"
+        [class.badge-primary]="client.membership == 'PRO'"
+        [class.badge-warning]="client.membership == 'Regular'"
+        >{{client.membership | uppercase}}</span></td>
+      <td><span class="badge badge-default">{{client.location.state  | uppercase}}</span></td>
+      <td><span 
+        class="badge"
+        [class.badge-danger]="client.balance > 0"
+        [class.badge-success]="client.balance == 0"
+        >{{client.balance | currency:'USD':true}}</span></td>
+      <td><a class="btn btn-secondary" [routerLink]="['client-details/'+ client.$key + '/' + client.lastName]" > <i class="fa fa-info-circle"></i> Details</a></td>
+    </tr>
+  </tbody>
+</table>
+<ng-template #noclients>
+  <h2>There is no clients in the database</h2>
+</ng-template>

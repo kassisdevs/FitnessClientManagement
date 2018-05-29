@@ -1,0 +1,190 @@
+<div class="row">
+    <div class="col-md-6">
+      <a [routerLink]="['/client-details/'+ id + '/' + client.lastName]" class="btn btn-link"> <i class="fa fa-chevron-circle-left"></i> Back to Details</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <div class="card">
+        <div class="card-header">
+           Edit Client
+        </div>
+        <div class="card-block">
+          <form novalidate #form="ngForm" (ngSubmit)="onSubmit(form)" >
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input 
+              class="form-control"
+              type="text"
+              [(ngModel)]="client.firstName"
+              name="firstName"
+              #clientFirstName="ngModel"
+              required
+              minlength="2"
+              >
+              <div
+              *ngIf="clientFirstName.errors?.required && clientFirstName.touched"
+              class="alert alert-danger"
+              >First Name is Required!</div>
+              <div
+              *ngIf="clientFirstName.errors?.minlength && clientFirstName.touched"
+              class="alert alert-danger"
+              >Minimum Char is 2!!</div>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input 
+              class="form-control"
+              type="text"
+              [(ngModel)]="client.lastName"
+              name="lastName"
+              #clientLastName="ngModel"
+              required
+              minlength="2"
+              >
+              <div
+              *ngIf="clientLastName.errors?.required && clientLastName.touched"
+              class="alert alert-danger"
+              >Last Name is Required!</div>
+              <div
+              *ngIf="clientLastName.errors?.minlength && clientLastName.touched"
+              class="alert alert-danger"
+              >Minimum Char is 2!!</div>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input 
+              class="form-control"
+              type="email"
+              [(ngModel)]="client.email"
+              name="email"
+              #clientemail="ngModel"
+              required
+              minlength="5"
+              >
+              <div
+              *ngIf="clientemail.errors?.required && clientemail.touched"
+              class="alert alert-danger"
+              >Email is Required!</div>
+              <div
+              *ngIf="clientemail.errors?.minlength && clientemail.touched"
+              class="alert alert-danger"
+              >Minimum Char is 5!!</div>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input 
+              class="form-control"
+              type="phone"
+              [(ngModel)]="client.phone"
+              name="phone"
+              #clientphone="ngModel"
+              required
+              minlength="10"
+              >
+              <div
+              *ngIf="clientphone.errors?.required && clientphone.touched"
+              class="alert alert-danger"
+              >Phone is Required!</div>
+              <div
+              *ngIf="clientphone.errors?.minlength && clientphone.touched"
+              class="alert alert-danger"
+              >Minimum Char is 5!!</div>
+            </div>
+            <div class="form-group">
+              <label for="membership">Membership</label>
+              <select 
+              class="form-control" 
+              [(ngModel)]="selectedPlan"
+              (change)="setPlan($event.target.value)"
+              name="membership"
+              #clientmembership="ngModel"
+              required>
+              <option 
+              *ngFor="let type of membertype" 
+              [value]="type"
+              >{{type}}
+            </option>
+              </select>
+              <div
+              *ngIf="clientmembership.errors?.required && clientmembership.touched"
+              class="alert alert-danger"
+              >Address is Required!</div>
+            </div>
+            <div class="form-group">
+              <label for="address">Address</label>
+              <input 
+              class="form-control"
+              type="text"
+              [(ngModel)]="client.location.address"
+              name="address"
+              #clientaddress="ngModel"
+              required
+              minlength="5"
+              >
+              <div
+              *ngIf="clientaddress.errors?.required && clientaddress.touched"
+              class="alert alert-danger"
+              >Address is Required!</div>
+              <div
+              *ngIf="clientaddress.errors?.minlength && clientaddress.touched"
+              class="alert alert-danger"
+              >Minimum Char is 5!</div>
+            </div>
+            <div class="form-group">
+              <label for="zip">Zip Code</label>
+              <input 
+              class="form-control"
+              type="text"
+              [(ngModel)]="client.location.zip"
+              name="zip"
+              #clientzip="ngModel"
+              required
+              minlength="5"
+              >
+              <div
+              *ngIf="clientzip.errors?.required && clientzip.touched"
+              class="alert alert-danger"
+              >Zip Code is Required!</div>
+              <div
+              *ngIf="clientzip.errors?.minlength && clientzip.touched"
+              class="alert alert-danger"
+              >Minimum Char is 5!</div>
+            </div>
+            <div class="form-group">
+              <label for="state">State</label>
+              <input 
+              class="form-control"
+              type="text"
+              [(ngModel)]="client.location.state"
+              name="state"
+              #clientstate="ngModel"
+              required
+              maxlength="2"
+              >
+              <div
+              *ngIf="clientstate.errors?.required && clientstate.touched"
+              class="alert alert-danger"
+              >State is Required!</div>
+              <div
+              *ngIf="clientstate.errors?.minlength && clientstate.touched"
+              class="alert alert-danger"
+              >Minimum Char is 2!</div>
+            </div>
+            <div class="form-group">
+              <label for="balance">Balance</label>
+              <input 
+              class="form-control"
+              type="text"
+              [(ngModel)]="client.balance"
+              name="balance"
+              #clientbalance="ngModel"
+              [disabled]="!isDisabledOnEdit"
+              >
+            </div>
+            <input type="submit" value="Submit" class="form-control btn btn-primary">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

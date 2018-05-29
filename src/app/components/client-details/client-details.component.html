@@ -1,0 +1,61 @@
+<div class="row my-1">
+    <div class="col-md-9">
+      <a routerLink="/" class="btn btn-link"> <i class="fa fa-chevron-circle-left"></i> Back to dashboard</a>
+    </div>
+    <div class="col-md-3 float-right">
+        <a class="btn btn-danger float-right text-white" (click)="onDelete()">Delete</a>
+        <a class="btn btn-outline-primary float-right" [routerLink]="['/edit-client/'+id]" >Edit</a>
+    </div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-md-9">
+          <h4>{{client.firstName}} {{client.lastName}}</h4>
+      </div>
+      <div class="col-md-3">
+        <div class="pull-right">
+            <h4>Balance: 
+                <span 
+                [class.text-success]="!hasBalance"
+                [class.text-danger]="hasBalance"
+                 >
+                    {{client.balance | currency:'USD':true}}
+                </span>
+                <i class="fa fa-edit" (click)="editBalance = !editBalance"></i>
+            </h4>
+            
+        </div>
+        <div class="clearfix">
+          <form *ngIf="editBalance">
+          <input 
+          type="number"
+          [(ngModel)]="client.balance"
+          name="balance"
+          >
+          <button type="button" (click)="onUpdateBalance()">Update</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-block">
+    <ul class="list-group">
+      <li class="list-group-item">
+          ID: {{client.$key}}
+      </li>
+      <li class="list-group-item">
+          Email: {{client.email}}
+      </li>
+      <li class="list-group-item">
+          Phone: {{client.phone}}
+      </li>
+      <li class="list-group-item">
+          Membership Type: {{client.membership}}
+      </li>
+      <li class="list-group-item">
+          Address: {{client.location.address}}, {{client.location.zip}}, {{client.location.state | uppercase}}
+      </li>
+    </ul>
+  </div>
+</div>

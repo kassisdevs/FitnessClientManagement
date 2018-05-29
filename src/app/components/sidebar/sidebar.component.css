@@ -1,0 +1,7 @@
+a {
+  background: #0070ba;
+  border: none;
+}
+a:hover {
+  background: #0079ad;
+}
